@@ -56,7 +56,7 @@ window.ARCHETYPES = [
   },
   {
     id: 'k_sparse',
-    name: 'Sparse, wealthy, resource-rich exporters',
+    name: 'Sparse, wealthy, resource-rich',
     short: 'Sparse & resource-rich',
     examples: 'US East · Russia · Canada · ERCOT · Saudi Arabia · Australia NEM',
     color: '#0B9E45', tint: '#DFF3E5',
