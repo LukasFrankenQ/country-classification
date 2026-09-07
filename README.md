@@ -54,7 +54,7 @@ window.LAYERS.push({
 - `proximity` is 0..1 and is carried through to the CSV export. Cells are drawn in the archetype's
   full colour; set `PROXIMITY_SHADING = true` in `index.html` to fade towards white with low
   proximity instead. Countries missing from `countries` are drawn light grey.
-- `modelled` names the one representative country per archetype; those get the red cell outline
+- `modelled` names the one representative country per archetype; those get the black cell outline
   and are listed in the Legend tab.
 - Optional `totals`: `{ population: {dense: n, ...}, demand_twh: {...}, emissions_mt: {...} }`,
   absolute sums per archetype. When present, the Legend tab shows three vertical stacked bars with

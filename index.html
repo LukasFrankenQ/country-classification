@@ -52,7 +52,7 @@
   .lg-name { font-size: 13px; font-weight: 600; line-height: 1.3; }
   .lg-ex { font-size: 11px; color: #777; line-height: 1.4; margin-top: 2px; }
   .lg-mod { font-size: 11px; color: #333; margin-top: 4px; display: flex; align-items: center; gap: 6px; }
-  .lg-mod .box { width: 14px; height: 9px; border: 1.5px solid #d0021b; border-radius: 1px; }
+  .lg-mod .box { width: 14px; height: 9px; border: 2px solid #111; border-radius: 1px; }
   .lg-mod .none { color: #999; }
   .lg-bars { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; padding: 4px 0 0; }
   .lg-bar { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 84px; flex: none; }
@@ -88,7 +88,7 @@
   .m-card.hi { border-color: #1a1a1a; box-shadow: 0 0 0 1px #1a1a1a; }
   .m-card svg.prof { display: block; width: 100%; height: 58px; }
   .m-card .cn { font-size: 11px; font-weight: 600; line-height: 1.25; margin-top: 5px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-height: 27px; }
-  .m-card .cn .box { display: inline-block; width: 11px; height: 7px; border: 1.5px solid #d0021b; border-radius: 1px; vertical-align: middle; margin-right: 4px; }
+  .m-card .cn .box { display: inline-block; width: 11px; height: 7px; border: 2px solid #111; border-radius: 1px; vertical-align: middle; margin-right: 4px; }
   .m-card .cn .ov { color: #b45309; font-weight: 400; font-size: 10px; margin-left: 3px; }
   .m-card .dm { font-size: 10px; color: #777; font-family: ui-monospace, Menlo, monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .m-card .dm small { font-family: Helvetica, Arial, sans-serif; color: #aaa; }
@@ -102,8 +102,8 @@
   .m-plot { flex: 1; min-height: 0; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; }
   .m-plot svg { width: 100%; height: 100%; display: block; }
   .m-plot circle { stroke: #fff; stroke-width: 0.8; cursor: default; }
-  .m-plot circle.hi { stroke: #1a1a1a; stroke-width: 2; }
-  .m-plot circle.mod { stroke: #d0021b; stroke-width: 1.6; }
+  .m-plot circle.mod { stroke: #111; stroke-width: 2; }
+  .m-plot circle.hi { stroke: #1a1a1a; stroke-width: 3.2; }
   .m-plot text { font-size: 9px; fill: #333; pointer-events: none; font-family: Helvetica, Arial, sans-serif; }
   .m-note { font-size: 10px; color: #999; line-height: 1.45; margin-top: 8px; }
   .m-cards.six { grid-template-columns: repeat(6, minmax(0, 1fr)); }
@@ -222,13 +222,14 @@
   const SIZE_MIN = 0.25;         // smallest drawn square, as a fraction of the cell
   const VANISH_DENSITY = 0.5;    // people per km² below which a population-sized square is not drawn
 
-  // Highlight: countries whose grid cells get a thin red outline.
+  // Highlight: countries whose grid cells get a black outline with a white halo.
   const HL = {
     count: 5,
     minKm2: 200000,              // random pick band, "medium": France, Kenya, Thailand size and up
     maxKm2: 3500000,             // "large": up to India / Argentina; excludes the continental giants
-    color: '#d0021b',
-    width: 1.4,
+    color: '#111111',
+    width: 2.2,
+    halo: 'rgba(255,255,255,0.9)',   // drawn under the outline so it reads on dark cells and on the basemap alike
     areaLevel: 9                 // grid level used to measure each country's cell area
   };
 
@@ -243,7 +244,7 @@
     tab: 'legend',               // panel tab: 'legend' (map) | 'kmeans' | 'rules' (full-screen classification views)
     lockK: null,                 // null = follow zoom; otherwise the fixed grid level
     basemap: 'light', panelOpen: true, loading: true, err: false, popLoading: HAVE_POP,
-    highlight: new Set(),        // country indices with the red cell outline
+    highlight: new Set(),        // country indices with the black cell outline
     highlightMode: LAYERS.length ? 'modelled' : 'random',   // 'modelled' | 'random' | 'custom'
     seed: null                   // seed of the current random selection
   };
@@ -676,9 +677,12 @@
         if (I < row.length - 1 && !same(row[I + 1])) { ctx.moveTo(x1, y0); ctx.lineTo(x1, y1); }
       }
     }
+    ctx.lineCap = 'square';
+    ctx.lineWidth = HL.width + 2;
+    ctx.strokeStyle = HL.halo;
+    ctx.stroke();
     ctx.lineWidth = HL.width;
     ctx.strokeStyle = HL.color;
-    ctx.lineCap = 'square';
     ctx.stroke();
   }
 
@@ -1188,7 +1192,7 @@
     }
     svg += '</svg>';
     g += '<div class="m-plot">' + svg + '</div>';
-    g += '<div class="m-note">Dot area grows with expected 2050 demand; red ring = modelled grid; grids labelled: the 45 largest, the sub-national grids and the modelled ones. Axes have no unit: t-SNE preserves neighbourhoods, not distances.</div>';
+    g += '<div class="m-note">Dot area grows with expected 2050 demand; black ring = modelled grid; grids labelled: the 45 largest, the sub-national grids and the modelled ones. Axes have no unit: t-SNE preserves neighbourhoods, not distances.</div>';
     R.innerHTML = g;
   }
 
