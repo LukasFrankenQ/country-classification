@@ -56,7 +56,7 @@ window.ARCHETYPES = [
   },
   {
     id: 'k_sparse',
-    name: 'Sparse, wealthy, resource-rich',
+    name: 'Sparse, slow-growing, resource-rich',
     short: 'Sparse & resource-rich',
     examples: 'US East · Russia · Canada · ERCOT · Saudi Arabia · Australia NEM',
     color: '#0B9E45', tint: '#DFF3E5',
@@ -64,7 +64,7 @@ window.ARCHETYPES = [
   },
   {
     id: 'k_densefossil',
-    name: 'Dense, wealthy fossil brownfield',
+    name: 'Dense, slow-growing fossil brownfield',
     short: 'Dense fossil brownfield',
     examples: 'China · South Korea · Germany · UK · Spain · Poland',
     color: '#A85B00', tint: '#F5EBD9',
