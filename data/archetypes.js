@@ -48,7 +48,7 @@ window.ARCHETYPES = [
   // Ordered by mean fossil share, colours as in cluster_tsne.png. Icons in the same 48-unit stroke style.
   {
     id: 'k_growth',
-    name: 'Fossil-heavy, fast-growing, low-income',
+    name: 'Fast-growing',
     short: 'Fast-growing fossil',
     examples: 'India · Pakistan · Egypt · Bangladesh · Nigeria',
     color: '#DB2777', tint: '#FBE3EF',
