@@ -25,7 +25,7 @@ and icons from "Power System Archetype Icons".
 ## Data versions
 
 Each data version is a JS file that pushes one object onto `window.LAYERS`. The panel has three
-tabs: **Legend** (the map, with the classification dropdown, archetype meanings and share bars),
+tabs: **Map** (the map, with the classification dropdown, archetype meanings and share bars),
 **KMeans clustering** and **Rule-based** (full-screen views of how each classification was made).
 `?layer=<id>` selects a data version by URL.
 
