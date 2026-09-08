@@ -72,7 +72,7 @@ window.ARCHETYPES = [
   },
   {
     id: 'k_cleanfirm',
-    name: 'Hydro-rich (hydro & nuclear incumbents)',
+    name: 'Hydro-rich',
     short: 'Hydro-rich',
     examples: 'Brazil · France · Ethiopia · DR Congo · Sweden · Norway',
     color: '#1D4ED8', tint: '#E1E8FB',
