@@ -5,11 +5,11 @@ window.LAYERS.push({
  "name": "k-means clusters v1",
  "description": "Unsupervised k-means (k=5, weighted by expected 2050 demand) on seven engineered features: autarky, population density, 2050 kWh per capita, demand growth to 2050, clean incumbent share, fossil share, geothermal potential (scripts/sep/cluster_tsne.py). Grids below 1 TWh are not clustered and appear grey. Modelled grids: India (k_growth), United States (East) (k_sparse), China (k_densefossil), United States (West) (k_geo), Brazil (k_cleanfirm).",
  "archetypes": [
-  "k_growth",
-  "k_sparse",
   "k_densefossil",
   "k_geo",
-  "k_cleanfirm"
+  "k_growth",
+  "k_cleanfirm",
+  "k_sparse"
  ],
  "modelled": {
   "k_growth": "356",
