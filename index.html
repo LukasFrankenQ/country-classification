@@ -151,6 +151,26 @@
     width: 100%; font: inherit; font-size: 12px; font-weight: 600; padding: 6px 8px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.14);
     background: #fff; color: #1a1a1a;
   }
+  /* ?shot=map|archetypes|shares: export mode for ../screenshot_map.py (headless Chrome renders the page
+     and the slides pick the PNGs up). map: only the map, #root pinned to ?w x ?h at the top left;
+     archetypes / shares: that block of the Map tab alone, on white, the exporter trims to content. */
+  html[data-shot] body { background: #fff; }
+  html[data-shot] #root { inset: auto; left: 0; top: 0; }
+  html[data-shot] .leaflet-control-container, html[data-shot] .toast { display: none; }
+  html[data-shot="map"] .panel { display: none; }
+  html[data-shot="archetypes"] #map, html[data-shot="archetypes"] #grid,
+  html[data-shot="shares"] #map, html[data-shot="shares"] #grid { visibility: hidden; }
+  html[data-shot="archetypes"] #root, html[data-shot="shares"] #root { background: #fff; }
+  html[data-shot="archetypes"] .panel, html[data-shot="shares"] .panel {
+    top: 0; left: 0; background: #fff; border: none; border-radius: 0; box-shadow: none;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  html[data-shot="archetypes"] .panel-head, html[data-shot="archetypes"] .tabs,
+  html[data-shot="shares"] .panel-head, html[data-shot="shares"] .tabs { display: none; }
+  html[data-shot] .panel-body { max-height: none; overflow: visible; }
+  html[data-shot="archetypes"] .panel-body > :not(.lg-list) { display: none; }
+  html[data-shot="shares"] .panel-body > :not(.lg-bars) { display: none; }
+
   .toast {
     position: absolute; bottom: 16px; left: 14px; z-index: 1200; border-radius: 8px; padding: 6px 11px; font-size: 11px;
   }
@@ -279,6 +299,14 @@
 
   const $ = id => document.getElementById(id);
   const mapEl = $('map'), canvas = $('grid');
+
+  // ?shot=map|archetypes|shares&w=1767&h=651: export mode for ../screenshot_map.py, see the CSS block
+  const shot = ['map', 'archetypes', 'shares'].includes(qs.get('shot')) ? qs.get('shot') : null;
+  if (shot) {
+    document.documentElement.dataset.shot = shot;
+    $('root').style.width = (+qs.get('w') || 1767) + 'px';
+    $('root').style.height = (+qs.get('h') || 651) + 'px';
+  }
 
   let map = null, tiles = null, raf = null;
   let cid = null;                        // Uint16 per mask pixel: 0 = water, else country index (1 with land-only data)
