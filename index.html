@@ -177,8 +177,17 @@
   html[data-shot="tsne"] #kmeans .m-left { display: none; }
   html[data-shot="tsne"] #kmeans .m-right { border: none; padding: 0; }
   html[data-shot="tsne"] #kmeans .m-title, html[data-shot="tsne"] #kmeans .m-note { display: none; }
-  html[data-shot="tsne"] #kmeans .m-clist { margin: 0 0 6px 4px; }
+  html[data-shot="tsne"] #kmeans .m-right { position: relative; }
   html[data-shot="tsne"] #kmeans .m-plot { border: none; border-radius: 0; }
+  html[data-shot="tsne"] #kmeans .m-plot text { display: none; }   /* no country labels in the export */
+  /* cluster key as a two-column legend in the bottom-left corner of the plot */
+  html[data-shot="tsne"] #kmeans .m-clist {
+    position: absolute; left: 14px; bottom: 14px; z-index: 1; margin: 0; display: grid;
+    grid-template-columns: auto auto; gap: 8px 20px; padding: 10px 14px; border-radius: 8px;
+    background: rgba(255,255,255,0.92); border: 1px solid rgba(0,0,0,0.08);
+  }
+  html[data-shot="tsne"] #kmeans .m-citem { font-size: 22px; gap: 10px; }
+  html[data-shot="tsne"] #kmeans .m-citem i { width: 18px; height: 18px; }
 
   .toast {
     position: absolute; bottom: 16px; left: 14px; z-index: 1200; border-radius: 8px; padding: 6px 11px; font-size: 11px;
