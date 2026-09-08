@@ -15,12 +15,12 @@ and icons from "Power System Archetype Icons".
 | `index.html` | the page, no build step |
 | `data/countries.js` | Natural Earth 1:50m countries (world-atlas TopoJSON), embedded so file:// works |
 | `data/population.js` | GPW v4 2020 population count, 4 arc-minute grid, log-encoded PNG in base64 |
-| `data/regions.js` | sub-national grid regions (US East incl. ERCOT / West, plus Alaska and Hawaii as unmodelled regions, Australia NEM/SWIS, Malaysia Peninsular/Borneo) replacing their country, built by `../build_regions.py` |
+| `data/regions.js` | grid regions replacing their country: sub-national splits (US East incl. ERCOT / West, plus Alaska and Hawaii as unmodelled regions, Australia NEM/SWIS, Malaysia Peninsular/Borneo) and the merged North-West Europe region `NWE` (Iberia, France, Germany, Benelux, UK; `replaces` lists all eight parents), built by `../build_regions.py` |
 | `data/archetypes.js` | the five archetypes: id, names, colour, tint, SVG icon |
 | `data/layers/*.js` | data versions (see below), one file each |
 | `../prepare_population.py` | rebuilds `data/population.js` from the GPW Cloud Optimized GeoTIFF (pipeline repo) |
-| `../classify.py` | rule-based decision tree → `data/layers/rules-v1.js` (modelled: Germany, US West, Spain, Brazil, US East) plus the `explain` block behind the Rule-based tab |
-| `../cluster_tsne.py` | k-means on engineered features → `data/layers/clusters-v1.js` (cluster archetypes `k_*` in `archetypes.js`, modelled: India, US East, China, US West, Brazil) plus the `explain` block behind the KMeans clustering tab |
+| `../classify.py` | rule-based decision tree → `data/layers/rules-v1.js` (modelled: North-West Europe, US West, Australia SWIS, Brazil, US East) plus the `explain` block behind the Rule-based tab |
+| `../cluster_tsne.py` | k-means on engineered features → `data/layers/clusters-v1.js` (cluster archetypes `k_*` in `archetypes.js`, modelled: India, US East, North-West Europe, US West, Brazil) plus the `explain` block behind the KMeans clustering tab |
 
 ## Data versions
 
@@ -49,8 +49,8 @@ window.LAYERS.push({
 
 - Country keys are ISO 3166-1 numeric ids as strings (as in Natural Earth), or the exact Natural
   Earth name for the few geometries without an id (Kosovo, Somaliland, ...). The split regions are
-  keyed by their grid code (`USE`, `USW`, `AUN`, `AUW`, `MYW`, `MYE`); the parent ids 840,
-  036 and 458 are not drawn.
+  keyed by their grid code (`USE`, `USW`, `AUN`, `AUW`, `MYW`, `MYE`, `NWE`); the parent ids (840,
+  036, 458 and the eight North-West European countries) are not drawn.
 - `proximity` is 0..1 and is carried through to the CSV export. Cells are drawn in the archetype's
   full colour; set `PROXIMITY_SHADING = true` in `index.html` to fade towards white with low
   proximity instead. Countries missing from `countries` are drawn light grey.

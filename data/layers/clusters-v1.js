@@ -3,7 +3,7 @@ window.LAYERS = window.LAYERS || [];
 window.LAYERS.push({
  "id": "clusters-v1",
  "name": "k-means clusters v1",
- "description": "Unsupervised k-means (k=5, weighted by expected 2050 demand) on seven engineered features: autarky, population density, 2050 kWh per capita, demand growth to 2050, clean incumbent share, fossil share, geothermal potential (scripts/sep/cluster_tsne.py). Grids below 1 TWh are not clustered and appear grey. Modelled grids: India (k_growth), United States (East) (k_sparse), China (k_densefossil), United States (West) (k_geo), Brazil (k_cleanfirm).",
+ "description": "Unsupervised k-means (k=5, weighted by expected 2050 demand) on seven engineered features: autarky, population density, 2050 kWh per capita, demand growth to 2050, clean incumbent share, fossil share, geothermal potential (scripts/sep/cluster_tsne.py). Grids below 1 TWh are not clustered and appear grey. Modelled grids: India (k_growth), United States (East) (k_sparse), North-West Europe (k_densefossil), United States (West) (k_geo), Brazil (k_cleanfirm).",
  "archetypes": [
   "k_densefossil",
   "k_geo",
@@ -14,7 +14,7 @@ window.LAYERS.push({
  "modelled": {
   "k_growth": "356",
   "k_sparse": "USE",
-  "k_densefossil": "156",
+  "k_densefossil": "NWE",
   "k_geo": "USW",
   "k_cleanfirm": "076"
  },
@@ -62,10 +62,6 @@ window.LAYERS.push({
   "050": {
    "archetype": "k_growth",
    "proximity": 0.557
-  },
-  "056": {
-   "archetype": "k_cleanfirm",
-   "proximity": 0.476
   },
   "854": {
    "archetype": "k_growth",
@@ -163,10 +159,6 @@ window.LAYERS.push({
    "archetype": "k_densefossil",
    "proximity": 0.604
   },
-  "276": {
-   "archetype": "k_densefossil",
-   "proximity": 0.756
-  },
   "208": {
    "archetype": "k_densefossil",
    "proximity": 0.372
@@ -191,10 +183,6 @@ window.LAYERS.push({
    "archetype": "k_growth",
    "proximity": 0.784
   },
-  "724": {
-   "archetype": "k_densefossil",
-   "proximity": 0.696
-  },
   "231": {
    "archetype": "k_cleanfirm",
    "proximity": 0.391
@@ -207,17 +195,9 @@ window.LAYERS.push({
    "archetype": "k_cleanfirm",
    "proximity": 0.621
   },
-  "250": {
-   "archetype": "k_cleanfirm",
-   "proximity": 0.513
-  },
   "266": {
    "archetype": "k_cleanfirm",
    "proximity": 0.383
-  },
-  "826": {
-   "archetype": "k_densefossil",
-   "proximity": 0.665
   },
   "268": {
    "archetype": "k_cleanfirm",
@@ -347,10 +327,6 @@ window.LAYERS.push({
    "archetype": "k_cleanfirm",
    "proximity": 0.356
   },
-  "442": {
-   "archetype": "k_densefossil",
-   "proximity": 0.333
-  },
   "428": {
    "archetype": "k_cleanfirm",
    "proximity": 0.564
@@ -431,10 +407,6 @@ window.LAYERS.push({
    "archetype": "k_geo",
    "proximity": 0.368
   },
-  "528": {
-   "archetype": "k_densefossil",
-   "proximity": 0.619
-  },
   "578": {
    "archetype": "k_cleanfirm",
    "proximity": 0.342
@@ -474,10 +446,6 @@ window.LAYERS.push({
   "616": {
    "archetype": "k_densefossil",
    "proximity": 0.783
-  },
-  "620": {
-   "archetype": "k_cleanfirm",
-   "proximity": 0.566
   },
   "600": {
    "archetype": "k_cleanfirm",
@@ -642,35 +610,39 @@ window.LAYERS.push({
   "MYE": {
    "archetype": "k_sparse",
    "proximity": 0.632
+  },
+  "NWE": {
+   "archetype": "k_densefossil",
+   "proximity": 0.641
   }
  },
  "totals": {
   "population": {
    "k_growth": 3028141057.0,
    "k_sparse": 630082316.3725339,
-   "k_densefossil": 2068122881.909091,
+   "k_densefossil": 2159589870.909091,
    "k_geo": 981095289.0491495,
-   "k_cleanfirm": 1343883207.0
+   "k_cleanfirm": 1252416218.0
   },
   "demand_twh": {
    "k_growth": 3722.4800000000005,
    "k_sparse": 6884.073279532271,
-   "k_densefossil": 14309.439474394947,
+   "k_densefossil": 14926.939474394949,
    "k_geo": 3602.6903260915446,
-   "k_cleanfirm": 2774.94
+   "k_cleanfirm": 2157.44
   },
   "emissions_mt": {
    "k_growth": 2397.2500000000005,
    "k_sparse": 2833.5799999999995,
-   "k_densefossil": 7193.33,
+   "k_densefossil": 7230.96,
    "k_geo": 1531.8200000000002,
-   "k_cleanfirm": 332.86
+   "k_cleanfirm": 295.23
   }
  },
  "modelled_totals": {
-  "population": 3422761140.3307743,
-  "demand_twh": 17922.335368018765,
-  "emissions_mt": 8774.859999999999
+  "population": 2328751124.3307743,
+  "demand_twh": 9225.675368018765,
+  "emissions_mt": 3502.18
  },
  "totals_meta": {
   "population": {
@@ -691,7 +663,7 @@ window.LAYERS.push({
    "year": "2024",
    "source": "Ember yearly release 2024 (via country_archetypes.csv)"
   },
-  "coverage": "156 clustered grids (≥ 1 TWh demand), 155 with emissions data"
+  "coverage": "149 clustered grids (≥ 1 TWh demand), 148 with emissions data"
  },
  "explain": {
   "kind": "kmeans",
@@ -795,8 +767,8 @@ window.LAYERS.push({
     "proximity": 0.759,
     "demand_twh": 177.0,
     "demand_twh_2050": 331.8,
-    "x": 4.7,
-    "y": 9.41,
+    "x": 7.92,
+    "y": -4.23,
     "z": [
      0.88,
      0.53,
@@ -825,8 +797,8 @@ window.LAYERS.push({
     "proximity": 0.312,
     "demand_twh": 6.8,
     "demand_twh_2050": 74.3,
-    "x": -3.92,
-    "y": -4.51,
+    "x": 2.01,
+    "y": 6.49,
     "z": [
      -1.65,
      -0.08,
@@ -855,8 +827,8 @@ window.LAYERS.push({
     "proximity": 0.502,
     "demand_twh": 8.4,
     "demand_twh_2050": 9.2,
-    "x": -2.08,
-    "y": 5.0,
+    "x": -4.0,
+    "y": 1.08,
     "z": [
      0.89,
      0.16,
@@ -885,8 +857,8 @@ window.LAYERS.push({
     "proximity": 0.571,
     "demand_twh": 7.0,
     "demand_twh_2050": 9.7,
-    "x": -0.04,
-    "y": -0.84,
+    "x": -6.63,
+    "y": -1.56,
     "z": [
      -1.65,
      0.28,
@@ -915,8 +887,8 @@ window.LAYERS.push({
     "proximity": 0.453,
     "demand_twh": 15.6,
     "demand_twh_2050": 115.0,
-    "x": -4.58,
-    "y": -6.58,
+    "x": 3.07,
+    "y": 4.58,
     "z": [
      0.89,
      -0.64,
@@ -945,8 +917,8 @@ window.LAYERS.push({
     "proximity": 0.658,
     "demand_twh": 162.4,
     "demand_twh_2050": 239.6,
-    "x": 6.38,
-    "y": 3.82,
+    "x": 0.4,
+    "y": -2.48,
     "z": [
      0.16,
      -1.05,
@@ -975,8 +947,8 @@ window.LAYERS.push({
     "proximity": 0.618,
     "demand_twh": 77.4,
     "demand_twh_2050": 102.7,
-    "x": -3.65,
-    "y": 3.14,
+    "x": -2.89,
+    "y": -0.67,
     "z": [
      0.22,
      0.32,
@@ -1005,8 +977,8 @@ window.LAYERS.push({
     "proximity": 0.709,
     "demand_twh": 26.4,
     "demand_twh_2050": 43.4,
-    "x": 3.76,
-    "y": 6.29,
+    "x": 4.8,
+    "y": -3.34,
     "z": [
      0.39,
      0.4,
@@ -1035,8 +1007,8 @@ window.LAYERS.push({
     "proximity": 0.448,
     "demand_twh": 12.2,
     "demand_twh_2050": 13.4,
-    "x": 0.84,
-    "y": 0.19,
+    "x": -7.06,
+    "y": -0.82,
     "z": [
      -1.49,
      -0.1,
@@ -1065,8 +1037,8 @@ window.LAYERS.push({
     "proximity": 0.616,
     "demand_twh": 1.1,
     "demand_twh_2050": 1.5,
-    "x": 2.26,
-    "y": 8.16,
+    "x": 5.73,
+    "y": -5.48,
     "z": [
      0.89,
      1.61,
@@ -1095,8 +1067,8 @@ window.LAYERS.push({
     "proximity": 0.557,
     "demand_twh": 118.1,
     "demand_twh_2050": 431.1,
-    "x": 2.69,
-    "y": -8.36,
+    "x": 4.65,
+    "y": -7.07,
     "z": [
      -0.69,
      2.12,
@@ -1118,36 +1090,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "056",
-    "iso3": "BEL",
-    "name": "Belgium",
-    "cluster": "k_cleanfirm",
-    "proximity": 0.476,
-    "demand_twh": 80.3,
-    "demand_twh_2050": 112.5,
-    "x": -0.71,
-    "y": 2.26,
-    "z": [
-     -1.23,
-     1.23,
-     0.82,
-     -0.72,
-     0.16,
-     -0.95,
-     -0.32
-    ],
-    "disp": [
-     "0.17  (net imports 17 % of demand)",
-     "386 people/km²",
-     "9,412 kWh/cap in 2050",
-     "×1.40  (80 → 112 TWh)",
-     "37 % hydro + nuclear",
-     "20 % fossil",
-     "0.09  (0 MW installed, 0 % EGS-suitable, T@5 km p90 177 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "854",
     "iso3": "BFA",
     "name": "Burkina Faso",
@@ -1155,8 +1097,8 @@ window.LAYERS.push({
     "proximity": 0.258,
     "demand_twh": 3.2,
     "demand_twh_2050": 33.3,
-    "x": 0.06,
-    "y": -8.74,
+    "x": 7.21,
+    "y": 2.12,
     "z": [
      -1.65,
      0.12,
@@ -1185,8 +1127,8 @@ window.LAYERS.push({
     "proximity": 0.625,
     "demand_twh": 36.7,
     "demand_twh_2050": 41.2,
-    "x": -3.51,
-    "y": 3.5,
+    "x": -2.07,
+    "y": -0.73,
     "z": [
      0.43,
      -0.13,
@@ -1215,8 +1157,8 @@ window.LAYERS.push({
     "proximity": 0.391,
     "demand_twh": 38.4,
     "demand_twh_2050": 69.7,
-    "x": 2.43,
-    "y": 10.41,
+    "x": 7.77,
+    "y": -6.56,
     "z": [
      0.73,
      2.41,
@@ -1245,8 +1187,8 @@ window.LAYERS.push({
     "proximity": 0.269,
     "demand_twh": 2.3,
     "demand_twh_2050": 23.6,
-    "x": 0.17,
-    "y": -8.92,
+    "x": 7.31,
+    "y": 2.01,
     "z": [
      -1.65,
      0.41,
@@ -1275,8 +1217,8 @@ window.LAYERS.push({
     "proximity": 0.626,
     "demand_twh": 5.6,
     "demand_twh_2050": 8.7,
-    "x": 5.65,
-    "y": 8.16,
+    "x": 7.16,
+    "y": -4.8,
     "z": [
      0.89,
      0.15,
@@ -1305,8 +1247,8 @@ window.LAYERS.push({
     "proximity": 0.419,
     "demand_twh": 13.6,
     "demand_twh_2050": 41.1,
-    "x": 3.72,
-    "y": -3.59,
+    "x": -0.3,
+    "y": 4.31,
     "z": [
      0.89,
      -1.33,
@@ -1335,8 +1277,8 @@ window.LAYERS.push({
     "proximity": 0.669,
     "demand_twh": 762.1,
     "demand_twh_2050": 1090.4,
-    "x": -5.08,
-    "y": 1.89,
+    "x": -1.5,
+    "y": -0.3,
     "z": [
      0.7,
      -0.75,
@@ -1365,8 +1307,8 @@ window.LAYERS.push({
     "proximity": 0.616,
     "demand_twh": 2.2,
     "demand_twh_2050": 3.3,
-    "x": 5.72,
-    "y": 6.73,
+    "x": 3.13,
+    "y": -4.02,
     "z": [
      0.89,
      -0.42,
@@ -1395,8 +1337,8 @@ window.LAYERS.push({
     "proximity": 0.47,
     "demand_twh": 12.5,
     "demand_twh_2050": 19.3,
-    "x": -3.08,
-    "y": 0.36,
+    "x": -3.81,
+    "y": -2.72,
     "z": [
      -0.6,
      -0.9,
@@ -1425,8 +1367,8 @@ window.LAYERS.push({
     "proximity": 0.19,
     "demand_twh": 4.7,
     "demand_twh_2050": 11.4,
-    "x": 5.18,
-    "y": 1.52,
+    "x": -10.04,
+    "y": -1.64,
     "z": [
      -1.65,
      -2.02,
@@ -1455,8 +1397,8 @@ window.LAYERS.push({
     "proximity": 0.719,
     "demand_twh": 44.9,
     "demand_twh_2050": 52.0,
-    "x": -3.11,
-    "y": 4.59,
+    "x": -0.17,
+    "y": -1.62,
     "z": [
      0.64,
      -0.33,
@@ -1485,8 +1427,8 @@ window.LAYERS.push({
     "proximity": 0.515,
     "demand_twh": 645.6,
     "demand_twh_2050": 1011.5,
-    "x": -4.05,
-    "y": 0.9,
+    "x": -2.09,
+    "y": -2.67,
     "z": [
      0.76,
      -1.99,
@@ -1515,8 +1457,8 @@ window.LAYERS.push({
     "proximity": 0.33,
     "demand_twh": 17.4,
     "demand_twh_2050": 209.7,
-    "x": -4.96,
-    "y": -5.45,
+    "x": 2.82,
+    "y": 5.8,
     "z": [
      -0.16,
      -0.3,
@@ -1545,8 +1487,8 @@ window.LAYERS.push({
     "proximity": 0.516,
     "demand_twh": 5.4,
     "demand_twh_2050": 24.6,
-    "x": -0.25,
-    "y": -6.07,
+    "x": 4.67,
+    "y": 0.63,
     "z": [
      0.7,
      -0.99,
@@ -1575,8 +1517,8 @@ window.LAYERS.push({
     "proximity": 0.547,
     "demand_twh": 65.1,
     "demand_twh_2050": 93.8,
-    "x": -5.47,
-    "y": 3.57,
+    "x": -2.52,
+    "y": 0.88,
     "z": [
      0.88,
      0.84,
@@ -1605,8 +1547,8 @@ window.LAYERS.push({
     "proximity": 0.569,
     "demand_twh": 10.1,
     "demand_twh_2050": 75.7,
-    "x": -1.48,
-    "y": -7.24,
+    "x": 5.03,
+    "y": 2.15,
     "z": [
      -0.03,
      0.23,
@@ -1635,8 +1577,8 @@ window.LAYERS.push({
     "proximity": 0.695,
     "demand_twh": 88.5,
     "demand_twh_2050": 126.8,
-    "x": 6.96,
-    "y": -2.36,
+    "x": -3.45,
+    "y": 5.77,
     "z": [
      0.89,
      -0.72,
@@ -1665,8 +1607,8 @@ window.LAYERS.push({
     "proximity": 0.425,
     "demand_twh": 7.3,
     "demand_twh_2050": 61.9,
-    "x": -4.84,
-    "y": -6.45,
+    "x": 3.33,
+    "y": 4.84,
     "z": [
      0.79,
      -0.12,
@@ -1695,8 +1637,8 @@ window.LAYERS.push({
     "proximity": 0.952,
     "demand_twh": 10558.2,
     "demand_twh_2050": 13058.7,
-    "x": 4.26,
-    "y": 8.57,
+    "x": 7.1,
+    "y": -3.56,
     "z": [
      0.87,
      0.54,
@@ -1725,8 +1667,8 @@ window.LAYERS.push({
     "proximity": 0.755,
     "demand_twh": 91.6,
     "demand_twh_2050": 190.5,
-    "x": -5.95,
-    "y": 1.26,
+    "x": -0.85,
+    "y": 1.01,
     "z": [
      0.72,
      -0.3,
@@ -1755,8 +1697,8 @@ window.LAYERS.push({
     "proximity": 0.375,
     "demand_twh": 12.4,
     "demand_twh_2050": 20.4,
-    "x": -8.42,
-    "y": 1.33,
+    "x": -2.34,
+    "y": 4.38,
     "z": [
      0.52,
      0.25,
@@ -1785,8 +1727,8 @@ window.LAYERS.push({
     "proximity": 0.677,
     "demand_twh": 19.4,
     "demand_twh_2050": 30.6,
-    "x": 3.97,
-    "y": 6.47,
+    "x": 4.44,
+    "y": -3.59,
     "z": [
      0.89,
      0.29,
@@ -1815,8 +1757,8 @@ window.LAYERS.push({
     "proximity": 0.755,
     "demand_twh": 5.9,
     "demand_twh_2050": 9.1,
-    "x": 3.59,
-    "y": 7.29,
+    "x": 5.69,
+    "y": -3.81,
     "z": [
      0.89,
      0.52,
@@ -1845,8 +1787,8 @@ window.LAYERS.push({
     "proximity": 0.604,
     "demand_twh": 68.1,
     "demand_twh_2050": 88.7,
-    "x": -1.84,
-    "y": 2.84,
+    "x": -3.99,
+    "y": -0.68,
     "z": [
      -0.5,
      0.5,
@@ -1868,36 +1810,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "276",
-    "iso3": "DEU",
-    "name": "Germany",
-    "cluster": "k_densefossil",
-    "proximity": 0.756,
-    "demand_twh": 520.0,
-    "demand_twh_2050": 675.6,
-    "x": 0.91,
-    "y": 4.77,
-    "z": [
-     0.41,
-     0.88,
-     0.74,
-     -0.83,
-     -0.93,
-     -0.31,
-     0.58
-    ],
-    "disp": [
-     "0.81  (net imports 4 % of demand)",
-     "238 people/km²",
-     "8,720 kWh/cap in 2050",
-     "×1.30  (520 → 676 TWh)",
-     "4 % hydro + nuclear",
-     "41 % fossil",
-     "0.31  (78 MW installed, 5 % EGS-suitable, T@5 km p90 185 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "208",
     "iso3": "DNK",
     "name": "Denmark",
@@ -1905,8 +1817,8 @@ window.LAYERS.push({
     "proximity": 0.372,
     "demand_twh": 41.9,
     "demand_twh_2050": 59.5,
-    "x": 0.3,
-    "y": 2.16,
+    "x": -6.61,
+    "y": 0.65,
     "z": [
      -1.36,
      0.54,
@@ -1935,8 +1847,8 @@ window.LAYERS.push({
     "proximity": 0.831,
     "demand_twh": 22.7,
     "demand_twh_2050": 44.7,
-    "x": 2.5,
-    "y": 6.53,
+    "x": 4.96,
+    "y": -4.05,
     "z": [
      0.89,
      0.87,
@@ -1965,8 +1877,8 @@ window.LAYERS.push({
     "proximity": 0.491,
     "demand_twh": 93.8,
     "demand_twh_2050": 205.2,
-    "x": 5.78,
-    "y": 5.21,
+    "x": 2.66,
+    "y": -3.05,
     "z": [
      0.55,
      -0.94,
@@ -1995,8 +1907,8 @@ window.LAYERS.push({
     "proximity": 0.674,
     "demand_twh": 36.6,
     "demand_twh_2050": 74.0,
-    "x": -6.71,
-    "y": 1.29,
+    "x": -1.1,
+    "y": 1.57,
     "z": [
      0.88,
      0.01,
@@ -2025,8 +1937,8 @@ window.LAYERS.push({
     "proximity": 0.375,
     "demand_twh": 8.9,
     "demand_twh_2050": 10.9,
-    "x": 1.22,
-    "y": 1.26,
+    "x": -7.26,
+    "y": 0.22,
     "z": [
      -1.65,
      -0.58,
@@ -2055,8 +1967,8 @@ window.LAYERS.push({
     "proximity": 0.784,
     "demand_twh": 244.3,
     "demand_twh_2050": 568.8,
-    "x": 3.37,
-    "y": 5.85,
+    "x": 4.75,
+    "y": -2.82,
     "z": [
      0.82,
      0.35,
@@ -2078,36 +1990,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "724",
-    "iso3": "ESP",
-    "name": "Spain",
-    "cluster": "k_densefossil",
-    "proximity": 0.696,
-    "demand_twh": 275.2,
-    "demand_twh_2050": 356.9,
-    "x": -2.56,
-    "y": 3.75,
-    "z": [
-     0.3,
-     0.22,
-     0.62,
-     -0.83,
-     -0.06,
-     -0.78,
-     -0.4
-    ],
-    "disp": [
-     "0.77  (net imports -5 % of demand)",
-     "97 people/km²",
-     "7,806 kWh/cap in 2050",
-     "×1.30  (275 → 357 TWh)",
-     "30 % hydro + nuclear",
-     "25 % fossil",
-     "0.07  (0 MW installed, 2 % EGS-suitable, T@5 km p90 172 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "231",
     "iso3": "ETH",
     "name": "Ethiopia",
@@ -2115,8 +1997,8 @@ window.LAYERS.push({
     "proximity": 0.391,
     "demand_twh": 31.0,
     "demand_twh_2050": 263.8,
-    "x": -5.52,
-    "y": -5.05,
+    "x": 2.87,
+    "y": 6.34,
     "z": [
      -0.07,
      0.34,
@@ -2145,8 +2027,8 @@ window.LAYERS.push({
     "proximity": 0.507,
     "demand_twh": 87.9,
     "demand_twh_2050": 116.4,
-    "x": -3.47,
-    "y": 1.28,
+    "x": -2.82,
+    "y": -2.23,
     "z": [
      0.09,
      -0.98,
@@ -2175,8 +2057,8 @@ window.LAYERS.push({
     "proximity": 0.621,
     "demand_twh": 1.1,
     "demand_twh_2050": 2.7,
-    "x": -6.55,
-    "y": 0.14,
+    "x": -0.46,
+    "y": 2.27,
     "z": [
      0.89,
      -0.25,
@@ -2198,36 +2080,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "250",
-    "iso3": "FRA",
-    "name": "France",
-    "cluster": "k_cleanfirm",
-    "proximity": 0.513,
-    "demand_twh": 476.8,
-    "demand_twh_2050": 676.8,
-    "x": -2.16,
-    "y": -0.82,
-    "z": [
-     -1.6,
-     0.42,
-     0.85,
-     -0.7,
-     1.56,
-     -1.41,
-     0.93
-    ],
-    "disp": [
-     "0.02  (net imports -20 % of demand)",
-     "127 people/km²",
-     "9,713 kWh/cap in 2050",
-     "×1.42  (477 → 677 TWh)",
-     "79 % hydro + nuclear",
-     "5 % fossil",
-     "0.39  (16 MW installed, 21 % EGS-suitable, T@5 km p90 217 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "266",
     "iso3": "GAB",
     "name": "Gabon",
@@ -2235,8 +2087,8 @@ window.LAYERS.push({
     "proximity": 0.383,
     "demand_twh": 3.2,
     "demand_twh_2050": 11.1,
-    "x": 0.04,
-    "y": -4.1,
+    "x": -8.81,
+    "y": -2.45,
     "z": [
      -1.43,
      -1.45,
@@ -2258,36 +2110,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "826",
-    "iso3": "GBR",
-    "name": "United Kingdom",
-    "cluster": "k_densefossil",
-    "proximity": 0.665,
-    "demand_twh": 321.4,
-    "demand_twh_2050": 485.1,
-    "x": -0.5,
-    "y": 3.97,
-    "z": [
-     -0.26,
-     1.0,
-     0.41,
-     -0.62,
-     -0.58,
-     -0.47,
-     -0.61
-    ],
-    "disp": [
-     "0.55  (net imports 9 % of demand)",
-     "283 people/km²",
-     "6,475 kWh/cap in 2050",
-     "×1.51  (321 → 485 TWh)",
-     "14 % hydro + nuclear",
-     "36 % fossil",
-     "0.02  (0 MW installed, 0 % EGS-suitable, T@5 km p90 157 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "268",
     "iso3": "GEO",
     "name": "Georgia",
@@ -2295,8 +2117,8 @@ window.LAYERS.push({
     "proximity": 0.786,
     "demand_twh": 14.7,
     "demand_twh_2050": 19.8,
-    "x": -4.32,
-    "y": 2.23,
+    "x": -2.92,
+    "y": 0.02,
     "z": [
      -0.15,
      -0.06,
@@ -2325,8 +2147,8 @@ window.LAYERS.push({
     "proximity": 0.625,
     "demand_twh": 21.8,
     "demand_twh_2050": 97.7,
-    "x": -1.68,
-    "y": -6.33,
+    "x": 4.32,
+    "y": 1.82,
     "z": [
      -0.53,
      0.54,
@@ -2355,8 +2177,8 @@ window.LAYERS.push({
     "proximity": 0.438,
     "demand_twh": 4.0,
     "demand_twh_2050": 29.6,
-    "x": -4.97,
-    "y": -6.5,
+    "x": 3.3,
+    "y": 4.82,
     "z": [
      0.89,
      -0.14,
@@ -2385,8 +2207,8 @@ window.LAYERS.push({
     "proximity": 0.693,
     "demand_twh": 1.5,
     "demand_twh_2050": 6.8,
-    "x": -0.99,
-    "y": -6.1,
+    "x": 4.27,
+    "y": 0.91,
     "z": [
      0.89,
      -0.05,
@@ -2415,8 +2237,8 @@ window.LAYERS.push({
     "proximity": 0.752,
     "demand_twh": 55.4,
     "demand_twh_2050": 68.2,
-    "x": 1.3,
-    "y": 4.67,
+    "x": 6.9,
+    "y": -2.72,
     "z": [
      0.31,
      0.09,
@@ -2445,8 +2267,8 @@ window.LAYERS.push({
     "proximity": 0.546,
     "demand_twh": 16.4,
     "demand_twh_2050": 56.5,
-    "x": -6.47,
-    "y": -1.06,
+    "x": 0.34,
+    "y": 2.71,
     "z": [
      0.46,
      0.63,
@@ -2475,8 +2297,8 @@ window.LAYERS.push({
     "proximity": 0.403,
     "demand_twh": 1.4,
     "demand_twh_2050": 3.0,
-    "x": 7.16,
-    "y": 5.11,
+    "x": 1.08,
+    "y": -5.19,
     "z": [
      0.89,
      -2.1,
@@ -2505,8 +2327,8 @@ window.LAYERS.push({
     "proximity": 0.651,
     "demand_twh": 12.6,
     "demand_twh_2050": 39.0,
-    "x": 5.49,
-    "y": -4.14,
+    "x": -2.18,
+    "y": 5.71,
     "z": [
      0.74,
      0.21,
@@ -2535,8 +2357,8 @@ window.LAYERS.push({
     "proximity": 0.532,
     "demand_twh": 20.0,
     "demand_twh_2050": 23.5,
-    "x": -0.12,
-    "y": 0.38,
+    "x": -6.17,
+    "y": -0.78,
     "z": [
      -1.65,
      -0.02,
@@ -2565,8 +2387,8 @@ window.LAYERS.push({
     "proximity": 0.488,
     "demand_twh": 49.2,
     "demand_twh_2050": 62.6,
-    "x": 2.03,
-    "y": -0.91,
+    "x": -5.86,
+    "y": 2.82,
     "z": [
      -1.44,
      0.28,
@@ -2595,8 +2417,8 @@ window.LAYERS.push({
     "proximity": 0.696,
     "demand_twh": 372.5,
     "demand_twh_2050": 897.0,
-    "x": 6.13,
-    "y": -3.69,
+    "x": -2.07,
+    "y": 6.69,
     "z": [
      0.86,
      0.54,
@@ -2625,8 +2447,8 @@ window.LAYERS.push({
     "proximity": 0.512,
     "demand_twh": 37.1,
     "demand_twh_2050": 57.7,
-    "x": 1.45,
-    "y": 1.75,
+    "x": -7.48,
+    "y": 0.31,
     "z": [
      -1.21,
      0.06,
@@ -2655,8 +2477,8 @@ window.LAYERS.push({
     "proximity": 0.621,
     "demand_twh": 75.7,
     "demand_twh_2050": 144.7,
-    "x": 1.76,
-    "y": 8.84,
+    "x": 6.27,
+    "y": -6.22,
     "z": [
      -0.18,
      1.35,
@@ -2685,8 +2507,8 @@ window.LAYERS.push({
     "proximity": 0.874,
     "demand_twh": 2082.8,
     "demand_twh_2050": 4907.4,
-    "x": 1.69,
-    "y": 6.69,
+    "x": 4.68,
+    "y": -4.83,
     "z": [
      0.89,
      1.39,
@@ -2715,8 +2537,8 @@ window.LAYERS.push({
     "proximity": 0.683,
     "demand_twh": 156.8,
     "demand_twh_2050": 335.9,
-    "x": 4.24,
-    "y": 5.64,
+    "x": 4.43,
+    "y": -2.85,
     "z": [
      0.32,
      0.28,
@@ -2745,8 +2567,8 @@ window.LAYERS.push({
     "proximity": 0.57,
     "demand_twh": 395.6,
     "demand_twh_2050": 610.4,
-    "x": 5.08,
-    "y": 6.66,
+    "x": 3.66,
+    "y": -3.71,
     "z": [
      0.89,
      -0.17,
@@ -2775,8 +2597,8 @@ window.LAYERS.push({
     "proximity": 0.05,
     "demand_twh": 19.1,
     "demand_twh_2050": 28.7,
-    "x": 8.08,
-    "y": -1.15,
+    "x": -5.0,
+    "y": 5.92,
     "z": [
      0.89,
      -2.12,
@@ -2805,8 +2627,8 @@ window.LAYERS.push({
     "proximity": 0.523,
     "demand_twh": 311.8,
     "demand_twh_2050": 379.2,
-    "x": 3.36,
-    "y": -1.13,
+    "x": -5.72,
+    "y": 3.57,
     "z": [
      -1.02,
      0.75,
@@ -2835,8 +2657,8 @@ window.LAYERS.push({
     "proximity": 0.754,
     "demand_twh": 4.9,
     "demand_twh_2050": 7.9,
-    "x": 2.72,
-    "y": 6.87,
+    "x": 5.05,
+    "y": -4.27,
     "z": [
      0.89,
      0.95,
@@ -2865,8 +2687,8 @@ window.LAYERS.push({
     "proximity": 0.796,
     "demand_twh": 23.7,
     "demand_twh_2050": 57.5,
-    "x": 2.96,
-    "y": 5.86,
+    "x": 5.11,
+    "y": -2.79,
     "z": [
      0.86,
      0.43,
@@ -2895,8 +2717,8 @@ window.LAYERS.push({
     "proximity": 0.723,
     "demand_twh": 1030.0,
     "demand_twh_2050": 1227.9,
-    "x": 5.88,
-    "y": -2.24,
+    "x": -3.3,
+    "y": 7.16,
     "z": [
      0.89,
      1.14,
@@ -2925,8 +2747,8 @@ window.LAYERS.push({
     "proximity": 0.302,
     "demand_twh": 15.6,
     "demand_twh_2050": 106.6,
-    "x": 3.45,
-    "y": -5.49,
+    "x": -3.87,
+    "y": 3.95,
     "z": [
      -0.37,
      0.21,
@@ -2955,8 +2777,8 @@ window.LAYERS.push({
     "proximity": 0.66,
     "demand_twh": 19.2,
     "demand_twh_2050": 38.4,
-    "x": -1.91,
-    "y": -1.86,
+    "x": -5.96,
+    "y": -2.99,
     "z": [
      -1.45,
      -0.47,
@@ -2985,8 +2807,8 @@ window.LAYERS.push({
     "proximity": 0.45,
     "demand_twh": 22.4,
     "demand_twh_2050": 60.2,
-    "x": 0.64,
-    "y": -2.18,
+    "x": -7.82,
+    "y": -1.57,
     "z": [
      -1.65,
      0.24,
@@ -3015,8 +2837,8 @@ window.LAYERS.push({
     "proximity": 0.579,
     "demand_twh": 27.1,
     "demand_twh_2050": 63.8,
-    "x": -6.26,
-    "y": -2.02,
+    "x": 1.37,
+    "y": 1.41,
     "z": [
      0.89,
      0.82,
@@ -3045,8 +2867,8 @@ window.LAYERS.push({
     "proximity": 0.736,
     "demand_twh": 624.7,
     "demand_twh_2050": 751.7,
-    "x": 4.32,
-    "y": 9.87,
+    "x": 8.3,
+    "y": -4.6,
     "z": [
      0.89,
      1.46,
@@ -3075,8 +2897,8 @@ window.LAYERS.push({
     "proximity": 0.605,
     "demand_twh": 89.2,
     "demand_twh_2050": 158.1,
-    "x": 3.45,
-    "y": 9.83,
+    "x": 7.61,
+    "y": -5.51,
     "z": [
      0.89,
      0.98,
@@ -3105,8 +2927,8 @@ window.LAYERS.push({
     "proximity": 0.672,
     "demand_twh": 126.1,
     "demand_twh_2050": 224.8,
-    "x": 7.38,
-    "y": 5.75,
+    "x": 1.24,
+    "y": -4.21,
     "z": [
      0.65,
      -1.63,
@@ -3135,8 +2957,8 @@ window.LAYERS.push({
     "proximity": 0.65,
     "demand_twh": 15.6,
     "demand_twh_2050": 33.7,
-    "x": -1.79,
-    "y": -2.06,
+    "x": -6.24,
+    "y": -3.02,
     "z": [
      -1.65,
      -0.55,
@@ -3165,8 +2987,8 @@ window.LAYERS.push({
     "proximity": 0.823,
     "demand_twh": 5.3,
     "demand_twh_2050": 16.4,
-    "x": 1.06,
-    "y": 6.61,
+    "x": 3.14,
+    "y": -0.42,
     "z": [
      0.89,
      1.5,
@@ -3195,8 +3017,8 @@ window.LAYERS.push({
     "proximity": 0.673,
     "demand_twh": 17.2,
     "demand_twh_2050": 50.4,
-    "x": -6.13,
-    "y": -2.52,
+    "x": 2.18,
+    "y": 1.23,
     "z": [
      0.89,
      1.17,
@@ -3225,8 +3047,8 @@ window.LAYERS.push({
     "proximity": 0.356,
     "demand_twh": 12.5,
     "demand_twh_2050": 14.0,
-    "x": 0.71,
-    "y": 1.17,
+    "x": -6.79,
+    "y": 0.14,
     "z": [
      -1.65,
      -0.32,
@@ -3248,36 +3070,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "442",
-    "iso3": "LUX",
-    "name": "Luxembourg",
-    "cluster": "k_densefossil",
-    "proximity": 0.333,
-    "demand_twh": 6.5,
-    "demand_twh_2050": 10.4,
-    "x": 0.19,
-    "y": 2.38,
-    "z": [
-     -1.65,
-     0.94,
-     1.19,
-     -0.52,
-     -0.95,
-     -1.3,
-     -0.44
-    ],
-    "disp": [
-     "0.00  (net imports 76 % of demand)",
-     "259 people/km²",
-     "13,185 kWh/cap in 2050",
-     "×1.61  (6 → 10 TWh)",
-     "3 % hydro + nuclear",
-     "8 % fossil",
-     "0.06  (0 MW installed, 0 % EGS-suitable, T@5 km p90 168 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "428",
     "iso3": "LVA",
     "name": "Latvia",
@@ -3285,8 +3077,8 @@ window.LAYERS.push({
     "proximity": 0.564,
     "demand_twh": 7.7,
     "demand_twh_2050": 8.8,
-    "x": -0.52,
-    "y": -0.07,
+    "x": -5.91,
+    "y": -1.18,
     "z": [
      -1.41,
      -0.62,
@@ -3315,8 +3107,8 @@ window.LAYERS.push({
     "proximity": 0.509,
     "demand_twh": 34.6,
     "demand_twh_2050": 60.1,
-    "x": 7.41,
-    "y": 5.5,
+    "x": 1.18,
+    "y": -4.81,
     "z": [
      0.89,
      -2.06,
@@ -3345,8 +3137,8 @@ window.LAYERS.push({
     "proximity": 0.718,
     "demand_twh": 47.9,
     "demand_twh_2050": 118.8,
-    "x": 3.82,
-    "y": 4.57,
+    "x": 4.56,
+    "y": -1.79,
     "z": [
      -0.1,
      0.13,
@@ -3375,8 +3167,8 @@ window.LAYERS.push({
     "proximity": 0.383,
     "demand_twh": 5.5,
     "demand_twh_2050": 6.7,
-    "x": 2.44,
-    "y": 1.46,
+    "x": -8.01,
+    "y": -0.55,
     "z": [
      -1.65,
      0.13,
@@ -3405,8 +3197,8 @@ window.LAYERS.push({
     "proximity": 0.55,
     "demand_twh": 3.5,
     "demand_twh_2050": 4.1,
-    "x": -0.94,
-    "y": -0.18,
+    "x": -5.67,
+    "y": -1.51,
     "z": [
      -1.65,
      -0.31,
@@ -3435,8 +3227,8 @@ window.LAYERS.push({
     "proximity": 0.295,
     "demand_twh": 2.4,
     "demand_twh_2050": 35.5,
-    "x": -2.88,
-    "y": -7.93,
+    "x": 4.78,
+    "y": 3.67,
     "z": [
      0.89,
      -0.2,
@@ -3465,8 +3257,8 @@ window.LAYERS.push({
     "proximity": 0.543,
     "demand_twh": 8.5,
     "demand_twh_2050": 9.9,
-    "x": 3.82,
-    "y": -1.47,
+    "x": -5.53,
+    "y": 3.94,
     "z": [
      -1.18,
      0.01,
@@ -3495,8 +3287,8 @@ window.LAYERS.push({
     "proximity": 0.348,
     "demand_twh": 5.5,
     "demand_twh_2050": 52.6,
-    "x": -0.2,
-    "y": -7.47,
+    "x": 6.28,
+    "y": 2.86,
     "z": [
      -0.27,
      -0.94,
@@ -3525,8 +3317,8 @@ window.LAYERS.push({
     "proximity": 0.604,
     "demand_twh": 21.9,
     "demand_twh_2050": 90.8,
-    "x": -2.88,
-    "y": -6.03,
+    "x": 2.87,
+    "y": 2.26,
     "z": [
      0.77,
      0.11,
@@ -3555,8 +3347,8 @@ window.LAYERS.push({
     "proximity": 0.216,
     "demand_twh": 12.4,
     "demand_twh_2050": 22.2,
-    "x": 5.32,
-    "y": 1.58,
+    "x": -10.13,
+    "y": -1.64,
     "z": [
      -1.65,
      -2.51,
@@ -3585,8 +3377,8 @@ window.LAYERS.push({
     "proximity": 0.211,
     "demand_twh": 2.4,
     "demand_twh_2050": 15.4,
-    "x": 0.62,
-    "y": -6.66,
+    "x": 6.82,
+    "y": 3.45,
     "z": [
      -0.72,
      -1.94,
@@ -3615,8 +3407,8 @@ window.LAYERS.push({
     "proximity": 0.298,
     "demand_twh": 3.2,
     "demand_twh_2050": 4.4,
-    "x": -0.31,
-    "y": 8.31,
+    "x": 5.75,
+    "y": -7.53,
     "z": [
      -1.65,
      2.31,
@@ -3645,8 +3437,8 @@ window.LAYERS.push({
     "proximity": 0.67,
     "demand_twh": 3.4,
     "demand_twh_2050": 4.5,
-    "x": 2.04,
-    "y": 7.68,
+    "x": 5.34,
+    "y": -5.3,
     "z": [
      0.89,
      1.58,
@@ -3675,8 +3467,8 @@ window.LAYERS.push({
     "proximity": 0.169,
     "demand_twh": 1.8,
     "demand_twh_2050": 26.1,
-    "x": -5.95,
-    "y": -6.17,
+    "x": 3.73,
+    "y": 6.13,
     "z": [
      0.75,
      0.83,
@@ -3705,8 +3497,8 @@ window.LAYERS.push({
     "proximity": 0.813,
     "demand_twh": 356.7,
     "demand_twh_2050": 599.8,
-    "x": 6.16,
-    "y": -3.14,
+    "x": -2.6,
+    "y": 6.6,
     "z": [
      0.88,
      -0.04,
@@ -3735,8 +3527,8 @@ window.LAYERS.push({
     "proximity": 0.477,
     "demand_twh": 16.5,
     "demand_twh_2050": 105.9,
-    "x": -3.22,
-    "y": -3.94,
+    "x": -7.27,
+    "y": -3.91,
     "z": [
      -1.65,
      -0.37,
@@ -3765,8 +3557,8 @@ window.LAYERS.push({
     "proximity": 0.419,
     "demand_twh": 4.0,
     "demand_twh_2050": 12.6,
-    "x": -1.76,
-    "y": -3.09,
+    "x": -6.68,
+    "y": -4.47,
     "z": [
      -1.65,
      -2.16,
@@ -3795,8 +3587,8 @@ window.LAYERS.push({
     "proximity": 0.05,
     "demand_twh": 2.1,
     "demand_twh_2050": 35.7,
-    "x": 0.58,
-    "y": -8.43,
+    "x": 7.49,
+    "y": 2.63,
     "z": [
      -1.65,
      -0.9,
@@ -3825,8 +3617,8 @@ window.LAYERS.push({
     "proximity": 0.534,
     "demand_twh": 39.2,
     "demand_twh_2050": 357.6,
-    "x": -1.89,
-    "y": -7.62,
+    "x": 4.8,
+    "y": 2.59,
     "z": [
      0.15,
      0.91,
@@ -3855,8 +3647,8 @@ window.LAYERS.push({
     "proximity": 0.368,
     "demand_twh": 5.4,
     "demand_twh_2050": 18.9,
-    "x": 3.26,
-    "y": -5.13,
+    "x": -4.31,
+    "y": 3.9,
     "z": [
      -1.22,
      -0.16,
@@ -3878,36 +3670,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "528",
-    "iso3": "NLD",
-    "name": "Netherlands",
-    "cluster": "k_densefossil",
-    "proximity": 0.619,
-    "demand_twh": 121.0,
-    "demand_twh_2050": 173.7,
-    "x": -0.1,
-    "y": 4.15,
-    "z": [
-     -0.57,
-     1.46,
-     0.81,
-     -0.69,
-     -0.96,
-     -0.15,
-     -0.33
-    ],
-    "disp": [
-     "0.43  (net imports -11 % of demand)",
-     "531 people/km²",
-     "9,369 kWh/cap in 2050",
-     "×1.44  (121 → 174 TWh)",
-     "3 % hydro + nuclear",
-     "46 % fossil",
-     "0.09  (0 MW installed, 0 % EGS-suitable, T@5 km p90 176 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "578",
     "iso3": "NOR",
     "name": "Norway",
@@ -3915,8 +3677,8 @@ window.LAYERS.push({
     "proximity": 0.342,
     "demand_twh": 137.8,
     "demand_twh_2050": 200.6,
-    "x": -2.79,
-    "y": 0.36,
+    "x": -4.0,
+    "y": -2.73,
     "z": [
      -1.24,
      -1.12,
@@ -3945,8 +3707,8 @@ window.LAYERS.push({
     "proximity": 0.466,
     "demand_twh": 11.0,
     "demand_twh_2050": 51.8,
-    "x": -6.31,
-    "y": -5.35,
+    "x": 3.75,
+    "y": 5.65,
     "z": [
      0.78,
      0.78,
@@ -3975,8 +3737,8 @@ window.LAYERS.push({
     "proximity": 0.435,
     "demand_twh": 43.3,
     "demand_twh_2050": 65.9,
-    "x": -7.69,
-    "y": 2.21,
+    "x": -2.53,
+    "y": 3.54,
     "z": [
      0.89,
      -0.93,
@@ -4005,8 +3767,8 @@ window.LAYERS.push({
     "proximity": 0.676,
     "demand_twh": 52.8,
     "demand_twh_2050": 105.4,
-    "x": 6.96,
-    "y": 6.6,
+    "x": 2.08,
+    "y": -4.42,
     "z": [
      0.89,
      -1.07,
@@ -4035,8 +3797,8 @@ window.LAYERS.push({
     "proximity": 0.656,
     "demand_twh": 13.3,
     "demand_twh_2050": 23.5,
-    "x": -6.45,
-    "y": 0.81,
+    "x": -1.17,
+    "y": 2.04,
     "z": [
      0.76,
      -0.12,
@@ -4065,8 +3827,8 @@ window.LAYERS.push({
     "proximity": 0.618,
     "demand_twh": 60.5,
     "demand_twh_2050": 131.5,
-    "x": -6.51,
-    "y": 0.52,
+    "x": -0.73,
+    "y": 2.19,
     "z": [
      0.89,
      -0.72,
@@ -4095,8 +3857,8 @@ window.LAYERS.push({
     "proximity": 0.41,
     "demand_twh": 4.7,
     "demand_twh_2050": 24.2,
-    "x": 4.15,
-    "y": -3.88,
+    "x": -0.5,
+    "y": 4.92,
     "z": [
      0.89,
      -0.82,
@@ -4125,8 +3887,8 @@ window.LAYERS.push({
     "proximity": 0.616,
     "demand_twh": 123.1,
     "demand_twh_2050": 338.0,
-    "x": 6.24,
-    "y": -3.94,
+    "x": -1.9,
+    "y": 6.73,
     "z": [
      0.89,
      1.23,
@@ -4155,8 +3917,8 @@ window.LAYERS.push({
     "proximity": 0.662,
     "demand_twh": 177.6,
     "demand_twh_2050": 759.8,
-    "x": -6.0,
-    "y": -2.85,
+    "x": 2.41,
+    "y": 1.6,
     "z": [
      0.86,
      1.09,
@@ -4185,8 +3947,8 @@ window.LAYERS.push({
     "proximity": 0.783,
     "demand_twh": 173.6,
     "demand_twh_2050": 209.7,
-    "x": 3.99,
-    "y": 7.51,
+    "x": 6.02,
+    "y": -3.69,
     "z": [
      0.82,
      0.38,
@@ -4208,36 +3970,6 @@ window.LAYERS.push({
     "override": false
    },
    {
-    "key": "620",
-    "iso3": "PRT",
-    "name": "Portugal",
-    "cluster": "k_cleanfirm",
-    "proximity": 0.566,
-    "demand_twh": 60.4,
-    "demand_twh_2050": 78.7,
-    "x": -0.5,
-    "y": 1.5,
-    "z": [
-     -1.07,
-     0.35,
-     0.62,
-     -0.82,
-     -0.07,
-     -0.98,
-     0.03
-    ],
-    "disp": [
-     "0.23  (net imports 15 % of demand)",
-     "115 people/km²",
-     "7,830 kWh/cap in 2050",
-     "×1.30  (60 → 79 TWh)",
-     "30 % hydro + nuclear",
-     "19 % fossil",
-     "0.18  (29 MW installed, 2 % EGS-suitable, T@5 km p90 172 °C)"
-    ],
-    "override": false
-   },
-   {
     "key": "600",
     "iso3": "PRY",
     "name": "Paraguay",
@@ -4245,8 +3977,8 @@ window.LAYERS.push({
     "proximity": 0.511,
     "demand_twh": 29.6,
     "demand_twh_2050": 51.1,
-    "x": -2.79,
-    "y": -1.4,
+    "x": -5.25,
+    "y": -3.65,
     "z": [
      -1.65,
      -1.02,
@@ -4275,8 +4007,8 @@ window.LAYERS.push({
     "proximity": 0.589,
     "demand_twh": 56.2,
     "demand_twh_2050": 105.2,
-    "x": 3.46,
-    "y": 9.86,
+    "x": 7.66,
+    "y": -5.53,
     "z": [
      0.89,
      0.86,
@@ -4305,8 +4037,8 @@ window.LAYERS.push({
     "proximity": 0.679,
     "demand_twh": 53.6,
     "demand_twh_2050": 66.3,
-    "x": -2.9,
-    "y": 3.07,
+    "x": -2.42,
+    "y": -0.59,
     "z": [
      -0.02,
      0.11,
@@ -4335,8 +4067,8 @@ window.LAYERS.push({
     "proximity": 0.837,
     "demand_twh": 38.0,
     "demand_twh_2050": 44.0,
-    "x": 6.17,
-    "y": -2.35,
+    "x": -3.39,
+    "y": 6.65,
     "z": [
      0.45,
      0.08,
@@ -4365,8 +4097,8 @@ window.LAYERS.push({
     "proximity": 0.757,
     "demand_twh": 1176.1,
     "demand_twh_2050": 1577.0,
-    "x": 7.33,
-    "y": 4.1,
+    "x": 0.27,
+    "y": -3.16,
     "z": [
      0.71,
      -1.52,
@@ -4395,8 +4127,8 @@ window.LAYERS.push({
     "proximity": 0.05,
     "demand_twh": 1.2,
     "demand_twh_2050": 16.1,
-    "x": 4.41,
-    "y": -6.05,
+    "x": -2.59,
+    "y": -5.92,
     "z": [
      -0.05,
      1.51,
@@ -4425,8 +4157,8 @@ window.LAYERS.push({
     "proximity": 0.663,
     "demand_twh": 454.6,
     "demand_twh_2050": 869.7,
-    "x": 7.06,
-    "y": 6.83,
+    "x": 2.11,
+    "y": -4.61,
     "z": [
      0.89,
      -1.1,
@@ -4455,8 +4187,8 @@ window.LAYERS.push({
     "proximity": 0.501,
     "demand_twh": 15.6,
     "demand_twh_2050": 114.6,
-    "x": -4.57,
-    "y": -5.94,
+    "x": 2.8,
+    "y": 5.04,
     "z": [
      0.24,
      -0.71,
@@ -4485,8 +4217,8 @@ window.LAYERS.push({
     "proximity": 0.462,
     "demand_twh": 136.7,
     "demand_twh_2050": 202.0,
-    "x": -2.11,
-    "y": 0.24,
+    "x": -4.67,
+    "y": -2.28,
     "z": [
      -1.65,
      -0.73,
@@ -4515,8 +4247,8 @@ window.LAYERS.push({
     "proximity": 0.301,
     "demand_twh": 60.4,
     "demand_twh_2050": 86.6,
-    "x": 1.84,
-    "y": 10.41,
+    "x": 7.56,
+    "y": -7.03,
     "z": [
      0.83,
      3.45,
@@ -4545,8 +4277,8 @@ window.LAYERS.push({
     "proximity": 0.661,
     "demand_twh": 14.4,
     "demand_twh_2050": 18.7,
-    "x": -4.58,
-    "y": 3.09,
+    "x": -2.41,
+    "y": 0.28,
     "z": [
      0.46,
      0.29,
@@ -4575,8 +4307,8 @@ window.LAYERS.push({
     "proximity": 0.723,
     "demand_twh": 26.7,
     "demand_twh_2050": 33.8,
-    "x": -4.0,
-    "y": 2.44,
+    "x": -3.2,
+    "y": -0.18,
     "z": [
      -0.23,
      0.34,
@@ -4605,8 +4337,8 @@ window.LAYERS.push({
     "proximity": 0.651,
     "demand_twh": 8.1,
     "demand_twh_2050": 48.7,
-    "x": -0.93,
-    "y": -7.26,
+    "x": 5.33,
+    "y": 1.51,
     "z": [
      0.11,
      0.2,
@@ -4635,8 +4367,8 @@ window.LAYERS.push({
     "proximity": 0.499,
     "demand_twh": 1.7,
     "demand_twh_2050": 3.0,
-    "x": -4.9,
-    "y": 0.25,
+    "x": -0.61,
+    "y": -2.74,
     "z": [
      0.89,
      -2.1,
@@ -4665,8 +4397,8 @@ window.LAYERS.push({
     "proximity": 0.458,
     "demand_twh": 6.2,
     "demand_twh_2050": 16.2,
-    "x": 5.64,
-    "y": -4.9,
+    "x": -2.37,
+    "y": 5.2,
     "z": [
      0.46,
      1.06,
@@ -4695,8 +4427,8 @@ window.LAYERS.push({
     "proximity": 0.767,
     "demand_twh": 24.3,
     "demand_twh_2050": 90.1,
-    "x": 3.09,
-    "y": 4.84,
+    "x": 4.51,
+    "y": -1.12,
     "z": [
      0.58,
      0.43,
@@ -4725,8 +4457,8 @@ window.LAYERS.push({
     "proximity": 0.633,
     "demand_twh": 1.6,
     "demand_twh_2050": 4.2,
-    "x": -1.3,
-    "y": -2.13,
+    "x": -6.6,
+    "y": -2.82,
     "z": [
      -1.65,
      0.01,
@@ -4755,8 +4487,8 @@ window.LAYERS.push({
     "proximity": 0.36,
     "demand_twh": 2.2,
     "demand_twh_2050": 17.3,
-    "x": -0.18,
-    "y": -8.79,
+    "x": 6.99,
+    "y": 1.81,
     "z": [
      -1.65,
      0.55,
@@ -4785,8 +4517,8 @@ window.LAYERS.push({
     "proximity": 0.487,
     "demand_twh": 225.1,
     "demand_twh_2050": 292.1,
-    "x": 2.83,
-    "y": 2.16,
+    "x": 6.08,
+    "y": -1.3,
     "z": [
      -1.19,
      0.49,
@@ -4815,8 +4547,8 @@ window.LAYERS.push({
     "proximity": 0.582,
     "demand_twh": 18.7,
     "demand_twh_2050": 50.3,
-    "x": -2.79,
-    "y": -2.06,
+    "x": -5.78,
+    "y": -3.78,
     "z": [
      -1.65,
      0.04,
@@ -4845,8 +4577,8 @@ window.LAYERS.push({
     "proximity": 0.28,
     "demand_twh": 24.0,
     "demand_twh_2050": 42.5,
-    "x": 4.72,
-    "y": 1.62,
+    "x": -9.81,
+    "y": -1.37,
     "z": [
      -1.65,
      -1.1,
@@ -4875,8 +4607,8 @@ window.LAYERS.push({
     "proximity": 0.554,
     "demand_twh": 24.9,
     "demand_twh_2050": 45.7,
-    "x": 4.14,
-    "y": 3.91,
+    "x": 5.35,
+    "y": -1.71,
     "z": [
      -0.43,
      0.07,
@@ -4905,8 +4637,8 @@ window.LAYERS.push({
     "proximity": 0.922,
     "demand_twh": 351.8,
     "demand_twh_2050": 511.1,
-    "x": 6.23,
-    "y": -2.8,
+    "x": -2.98,
+    "y": 6.46,
     "z": [
      0.82,
      0.32,
@@ -4935,8 +4667,8 @@ window.LAYERS.push({
     "proximity": 0.666,
     "demand_twh": 9.6,
     "demand_twh_2050": 12.4,
-    "x": 3.1,
-    "y": 8.64,
+    "x": 6.43,
+    "y": -5.17,
     "z": [
      0.89,
      0.96,
@@ -4965,8 +4697,8 @@ window.LAYERS.push({
     "proximity": 0.403,
     "demand_twh": 9.0,
     "demand_twh_2050": 113.6,
-    "x": -2.34,
-    "y": -7.91,
+    "x": 4.96,
+    "y": 3.23,
     "z": [
      0.62,
      0.04,
@@ -4995,8 +4727,8 @@ window.LAYERS.push({
     "proximity": 0.618,
     "demand_twh": 111.6,
     "demand_twh_2050": 132.6,
-    "x": -5.2,
-    "y": 2.69,
+    "x": -1.47,
+    "y": 0.08,
     "z": [
      0.88,
      -0.06,
@@ -5025,8 +4757,8 @@ window.LAYERS.push({
     "proximity": 0.257,
     "demand_twh": 5.4,
     "demand_twh_2050": 67.6,
-    "x": -5.71,
-    "y": -5.72,
+    "x": 3.35,
+    "y": 6.31,
     "z": [
      -0.15,
      0.89,
@@ -5055,8 +4787,8 @@ window.LAYERS.push({
     "proximity": 0.487,
     "demand_twh": 14.8,
     "demand_twh_2050": 19.9,
-    "x": -0.45,
-    "y": 0.5,
+    "x": -5.97,
+    "y": -0.46,
     "z": [
      -1.53,
      -0.94,
@@ -5085,8 +4817,8 @@ window.LAYERS.push({
     "proximity": 0.736,
     "demand_twh": 89.6,
     "demand_twh_2050": 198.9,
-    "x": 3.95,
-    "y": 5.5,
+    "x": 4.22,
+    "y": -2.53,
     "z": [
      0.48,
      0.09,
@@ -5115,8 +4847,8 @@ window.LAYERS.push({
     "proximity": 0.618,
     "demand_twh": 80.1,
     "demand_twh_2050": 127.7,
-    "x": -6.66,
-    "y": 1.92,
+    "x": -1.57,
+    "y": 1.36,
     "z": [
      0.89,
      -0.58,
@@ -5145,8 +4877,8 @@ window.LAYERS.push({
     "proximity": 0.731,
     "demand_twh": 313.6,
     "demand_twh_2050": 475.4,
-    "x": 0.4,
-    "y": 6.22,
+    "x": 4.22,
+    "y": -5.21,
     "z": [
      0.75,
      1.09,
@@ -5175,8 +4907,8 @@ window.LAYERS.push({
     "proximity": 0.404,
     "demand_twh": 5.2,
     "demand_twh_2050": 61.6,
-    "x": -1.73,
-    "y": -8.48,
+    "x": 5.51,
+    "y": 2.93,
     "z": [
      0.89,
      0.04,
@@ -5205,8 +4937,8 @@ window.LAYERS.push({
     "proximity": 0.655,
     "demand_twh": 236.8,
     "demand_twh_2050": 405.5,
-    "x": 4.81,
-    "y": 6.07,
+    "x": 3.72,
+    "y": -3.14,
     "z": [
      0.57,
      -0.22,
@@ -5235,8 +4967,8 @@ window.LAYERS.push({
     "proximity": 0.542,
     "demand_twh": 16.6,
     "demand_twh_2050": 81.2,
-    "x": -2.81,
-    "y": -3.52,
+    "x": -6.97,
+    "y": -3.84,
     "z": [
      -1.5,
      -0.68,
@@ -5265,8 +4997,8 @@ window.LAYERS.push({
     "proximity": 0.581,
     "demand_twh": 12.1,
     "demand_twh_2050": 53.5,
-    "x": -1.79,
-    "y": -4.28,
+    "x": -7.74,
+    "y": -3.09,
     "z": [
      -1.04,
      -0.38,
@@ -5295,8 +5027,8 @@ window.LAYERS.push({
     "proximity": 0.672,
     "demand_twh": 803.2,
     "demand_twh_2050": 1227.4,
-    "x": 7.03,
-    "y": -1.97,
+    "x": -3.86,
+    "y": 6.02,
     "z": [
      0.85,
      -0.76,
@@ -5325,8 +5057,8 @@ window.LAYERS.push({
     "proximity": 0.847,
     "demand_twh": 3716.0,
     "demand_twh_2050": 5679.0,
-    "x": 5.3,
-    "y": 9.17,
+    "x": 7.95,
+    "y": -3.67,
     "z": [
      0.85,
      -0.22,
@@ -5355,8 +5087,8 @@ window.LAYERS.push({
     "proximity": 0.695,
     "demand_twh": 265.6,
     "demand_twh_2050": 443.7,
-    "x": 8.17,
-    "y": 5.62,
+    "x": 0.57,
+    "y": -4.15,
     "z": [
      0.89,
      -1.96,
@@ -5385,8 +5117,8 @@ window.LAYERS.push({
     "proximity": 0.464,
     "demand_twh": 21.1,
     "demand_twh_2050": 35.2,
-    "x": 8.38,
-    "y": 5.25,
+    "x": 0.31,
+    "y": -4.66,
     "z": [
      0.89,
      -2.95,
@@ -5415,8 +5147,8 @@ window.LAYERS.push({
     "proximity": 0.744,
     "demand_twh": 159.0,
     "demand_twh_2050": 273.9,
-    "x": 3.28,
-    "y": 7.91,
+    "x": 6.05,
+    "y": -4.53,
     "z": [
      0.8,
      0.84,
@@ -5445,8 +5177,8 @@ window.LAYERS.push({
     "proximity": 0.632,
     "demand_twh": 41.0,
     "demand_twh_2050": 70.6,
-    "x": -5.42,
-    "y": 2.17,
+    "x": -1.1,
+    "y": -0.4,
     "z": [
      0.89,
      -0.56,
@@ -5464,6 +5196,36 @@ window.LAYERS.push({
      "62 % hydro + nuclear",
      "37 % fossil",
      "0.14  (0 MW installed, 5 % EGS-suitable, T@5 km p90 191 °C)"
+    ],
+    "override": false
+   },
+   {
+    "key": "NWE",
+    "iso3": "NWE",
+    "name": "North-West Europe",
+    "cluster": "k_densefossil",
+    "proximity": 0.641,
+    "demand_twh": 1861.6,
+    "demand_twh_2050": 2569.8,
+    "x": -2.54,
+    "y": 2.31,
+    "z": [
+     0.59,
+     0.65,
+     0.68,
+     -0.74,
+     0.06,
+     -0.76,
+     0.93
+    ],
+    "disp": [
+     "0.88  (net imports -2 % of demand)",
+     "175 people/km²",
+     "8,313 kWh/cap in 2050",
+     "×1.38  (1,862 → 2,570 TWh)",
+     "34 % hydro + nuclear",
+     "26 % fossil",
+     "0.39  (123 MW installed, 9 % EGS-suitable, T@5 km p90 197 °C)"
     ],
     "override": false
    }

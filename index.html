@@ -368,9 +368,11 @@
         if (!window.topojson) { setTimeout(go, 60); return; }
         const t = window.COUNTRIES_TOPO;
         const fc = window.topojson.feature(t, t.objects.countries);
-        // sub-national grid regions (data/regions.js) replace their parent country geometry
+        // grid regions (data/regions.js) replace their parent country geometry: sub-national splits
+        // (one parent) or merged regions (`replaces` is a list of parents)
         const regions = (window.REGIONS_GEO && window.REGIONS_GEO.features) || [];
-        const replaced = new Set(regions.map(r => String(r.properties.replaces)));
+        const parentsOf = r => [].concat(r.properties.replaces).map(String);
+        const replaced = new Set(regions.flatMap(parentsOf));
         countries = [{ id: null, name: '(no country)' }];
         const feats = [];
         for (const f of fc.features) {
@@ -379,7 +381,7 @@
           feats.push({ geometry: f.geometry, index: countries.length - 1 });
         }
         for (const r of regions) {
-          countries.push({ id: String(r.properties.id), name: r.properties.name || String(r.properties.id), region: true, parent: String(r.properties.replaces) });
+          countries.push({ id: String(r.properties.id), name: r.properties.name || String(r.properties.id), region: true, parents: parentsOf(r) });
           feats.push({ geometry: r.geometry, index: countries.length - 1 });
         }
         buildMask(feats);
@@ -1208,7 +1210,7 @@
     const colorOf = Object.fromEntries(ids.map((id, ci) => [id, A[ci].color]));
     const order = rows.map((r, i) => i).sort((p, q) => rows[q].demand_twh_2050 - rows[p].demand_twh_2050);   // big first, small on top
     const labelled = new Set(order.slice(0, 45));
-    for (let i = 0; i < rows.length; i++) if (/^(USE|USW|AUN|AUW|MYW|MYE)$/.test(rows[i].iso3) || modelledKeys.has(rows[i].key)) labelled.add(i);
+    for (let i = 0; i < rows.length; i++) if (/^(USE|USW|AUN|AUW|MYW|MYE|NWE)$/.test(rows[i].iso3) || modelledKeys.has(rows[i].key)) labelled.add(i);
     let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet">';
     for (const i of order) {
       const r = rows[i];
