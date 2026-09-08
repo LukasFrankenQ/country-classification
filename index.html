@@ -153,7 +153,8 @@
   }
   /* ?shot=map|archetypes|shares: export mode for ../screenshot_map.py (headless Chrome renders the page
      and the slides pick the PNGs up). map: only the map, #root pinned to ?w x ?h at the top left;
-     archetypes / shares: that block of the Map tab alone, on white, the exporter trims to content. */
+     archetypes / shares: that block of the Map tab alone, on white, the exporter trims to content;
+     tsne: the cluster key and t-SNE plot of the KMeans tab alone, on white. */
   html[data-shot] body { background: #fff; }
   html[data-shot] #root { inset: auto; left: 0; top: 0; }
   html[data-shot] .leaflet-control-container, html[data-shot] .toast { display: none; }
@@ -170,6 +171,14 @@
   html[data-shot] .panel-body { max-height: none; overflow: visible; }
   html[data-shot="archetypes"] .panel-body > :not(.lg-list) { display: none; }
   html[data-shot="shares"] .panel-body > :not(.lg-bars) { display: none; }
+  /* tsne: the t-SNE panel of the KMeans tab alone (cluster key + plot), on white */
+  html[data-shot="tsne"] #map, html[data-shot="tsne"] #grid, html[data-shot="tsne"] .panel { visibility: hidden; }
+  html[data-shot="tsne"] #kmeans { grid-template-columns: minmax(0, 1fr); background: #fff; }
+  html[data-shot="tsne"] #kmeans .m-left { display: none; }
+  html[data-shot="tsne"] #kmeans .m-right { border: none; padding: 0; }
+  html[data-shot="tsne"] #kmeans .m-title, html[data-shot="tsne"] #kmeans .m-note { display: none; }
+  html[data-shot="tsne"] #kmeans .m-clist { margin: 0 0 6px 4px; }
+  html[data-shot="tsne"] #kmeans .m-plot { border: none; border-radius: 0; }
 
   .toast {
     position: absolute; bottom: 16px; left: 14px; z-index: 1200; border-radius: 8px; padding: 6px 11px; font-size: 11px;
@@ -301,9 +310,10 @@
   const mapEl = $('map'), canvas = $('grid');
 
   // ?shot=map|archetypes|shares&w=1767&h=651: export mode for ../screenshot_map.py, see the CSS block
-  const shot = ['map', 'archetypes', 'shares'].includes(qs.get('shot')) ? qs.get('shot') : null;
+  const shot = ['map', 'archetypes', 'shares', 'tsne'].includes(qs.get('shot')) ? qs.get('shot') : null;
   if (shot) {
     document.documentElement.dataset.shot = shot;
+    if (shot === 'tsne') state.tab = 'kmeans';
     $('root').style.width = (+qs.get('w') || 1767) + 'px';
     $('root').style.height = (+qs.get('h') || 651) + 'px';
   }

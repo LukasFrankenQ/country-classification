@@ -104,10 +104,11 @@ The display options have no controls in the UI; they are set through the URL (or
 `highlight=modelled|none|Name,Name`, `seed` (random outline pick). `landGrid.exportCsv()` downloads
 every land cell at the current level.
 
-`shot=map|archetypes|shares` (with `w`, `h` in CSS px) is the export mode behind
+`shot=map|archetypes|shares|tsne` (with `w`, `h` in CSS px) is the export mode behind
 `../screenshot_map.py`: it shows only the map (pinned to `w` x `h` at the top left, no panel or
-controls) or only the archetype list / share bars of the Map tab on white, for headless Chrome to
-screenshot. The kickoff deck's Snakefile renders its three images that way.
+controls), only the archetype list / share bars of the Map tab, or only the cluster key and t-SNE
+plot of the KMeans tab, each on white, for headless Chrome to screenshot. The kickoff deck's
+Snakefile renders its four images that way.
 
 Example: `index.html?layer=clusters-v1&lat=20&lon=30&zoom=3`
 
