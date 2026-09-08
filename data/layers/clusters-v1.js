@@ -3,10 +3,11 @@ window.LAYERS = window.LAYERS || [];
 window.LAYERS.push({
  "id": "clusters-v1",
  "name": "k-means clusters v1",
- "description": "Unsupervised k-means (k=5, weighted by expected 2050 demand) on seven engineered features: autarky, population density, 2050 kWh per capita, demand growth to 2050, clean incumbent share, fossil share, geothermal potential (scripts/sep/cluster_tsne.py). Grids below 1 TWh are not clustered and appear grey. Modelled grids: India (k_growth), United States (East) (k_sparse), North-West Europe (k_densefossil), United States (West) (k_geo), Brazil (k_cleanfirm).",
+ "description": "Unsupervised k-means (k=5, weighted by expected 2050 demand) on seven engineered features: autarky, population density, 2050 kWh per capita, demand growth to 2050, clean incumbent share, fossil share, geothermal potential (scripts/sep/cluster_tsne.py). Grids below 1 TWh are not clustered and appear grey. Modelled grids: India (k_growth), United States (East) (k_sparse), North-West Europe (k_densefossil), United States (West) (k_geo), Brazil (k_cleanfirm), Singapore (k_islanded).",
  "archetypes": [
   "k_densefossil",
   "k_geo",
+  "k_islanded",
   "k_growth",
   "k_cleanfirm",
   "k_sparse"
@@ -16,7 +17,8 @@ window.LAYERS.push({
   "k_sparse": "USE",
   "k_densefossil": "NWE",
   "k_geo": "USW",
-  "k_cleanfirm": "076"
+  "k_cleanfirm": "076",
+  "k_islanded": "702"
  },
  "countries": {
   "784": {
@@ -484,8 +486,8 @@ window.LAYERS.push({
    "proximity": 0.462
   },
   "702": {
-   "archetype": "k_densefossil",
-   "proximity": 0.301
+   "archetype": "k_islanded",
+   "proximity": 1.0
   },
   "705": {
    "archetype": "k_cleanfirm",
@@ -618,31 +620,34 @@ window.LAYERS.push({
  },
  "totals": {
   "population": {
-   "k_growth": 3028141057.0,
-   "k_sparse": 630082316.3725339,
-   "k_densefossil": 2159589870.909091,
+   "k_densefossil": 2153478695.909091,
    "k_geo": 981095289.0491495,
-   "k_cleanfirm": 1252416218.0
+   "k_islanded": 6111175.0,
+   "k_growth": 3028141057.0,
+   "k_cleanfirm": 1252416218.0,
+   "k_sparse": 630082316.3725339
   },
   "demand_twh": {
-   "k_growth": 3722.4800000000005,
-   "k_sparse": 6884.073279532271,
-   "k_densefossil": 14926.939474394949,
+   "k_densefossil": 14866.499474394946,
    "k_geo": 3602.6903260915446,
-   "k_cleanfirm": 2157.44
+   "k_islanded": 60.44,
+   "k_growth": 3722.4800000000005,
+   "k_cleanfirm": 2157.44,
+   "k_sparse": 6884.073279532271
   },
   "emissions_mt": {
-   "k_growth": 2397.2500000000005,
-   "k_sparse": 2833.5799999999995,
-   "k_densefossil": 7230.96,
+   "k_densefossil": 7201.23,
    "k_geo": 1531.8200000000002,
-   "k_cleanfirm": 295.23
+   "k_islanded": 29.73,
+   "k_growth": 2397.2500000000005,
+   "k_cleanfirm": 295.23,
+   "k_sparse": 2833.5799999999995
   }
  },
  "modelled_totals": {
-  "population": 2328751124.3307743,
-  "demand_twh": 9225.675368018765,
-  "emissions_mt": 3502.18
+  "population": 2334862299.3307743,
+  "demand_twh": 9286.115368018765,
+  "emissions_mt": 3531.91
  },
  "totals_meta": {
   "population": {

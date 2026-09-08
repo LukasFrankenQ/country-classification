@@ -63,6 +63,15 @@ window.ARCHETYPES = [
     icon: '<line x1="5" y1="9" x2="43" y2="9"/><path d="M20 9 V29 L24 37 L28 29 V9"/><line x1="20" y1="15.5" x2="28" y2="13.5"/><line x1="20" y1="21.5" x2="28" y2="19.5"/><line x1="20" y1="27.5" x2="28" y2="25.5"/><path d="M10 41 q5 -4 0 -9.5 t0 -9.5"/><path d="M38 41 q5 -4 0 -9.5 t0 -9.5"/>'
   },
   {
+    // display-only in the k-means layer (no cluster behind it): the SOW's islanded archetype, modelled by Singapore
+    id: 'k_islanded',
+    name: 'Islanded / weakly interconnected',
+    short: 'Islanded',
+    examples: 'Singapore · Western Australia · Ireland',
+    color: '#6B7280', tint: '#ECEEF1',
+    icon: '<path d="M8 36 q16 -14 32 0"/><line x1="2" y1="36" x2="6" y2="36"/><line x1="42" y1="36" x2="46" y2="36"/><path d="M10 42 q3.5 -3 7 0 t7 0 t7 0 t7 0"/><path d="M26 33 q-1 -9 3 -17"/><path d="M29 16 q-9 -3 -13 4"/><path d="M29 16 q9 -3 13 4"/><path d="M29 16 q-5 -6 -10 -6"/><path d="M29 16 q5 -6 10 -5"/><path d="M29 16 q-1 -6 2 -9"/>'
+  },
+  {
     id: 'k_growth',
     name: 'High renewables potential',
     short: 'High RE potential',

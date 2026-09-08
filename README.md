@@ -20,7 +20,7 @@ and icons from "Power System Archetype Icons".
 | `data/layers/*.js` | data versions (see below), one file each |
 | `../prepare_population.py` | rebuilds `data/population.js` from the GPW Cloud Optimized GeoTIFF (pipeline repo) |
 | `../classify.py` | rule-based decision tree → `data/layers/rules-v1.js` (modelled: North-West Europe, US West, Australia SWIS, Brazil, US East) plus the `explain` block behind the Rule-based tab |
-| `../cluster_tsne.py` | k-means on engineered features → `data/layers/clusters-v1.js` (cluster archetypes `k_*` in `archetypes.js`, modelled: India, US East, North-West Europe, US West, Brazil) plus the `explain` block behind the KMeans clustering tab |
+| `../cluster_tsne.py` | k-means on engineered features → `data/layers/clusters-v1.js` (cluster archetypes `k_*` in `archetypes.js`, modelled: India, US East, North-West Europe, US West, Brazil, plus a display-only grey islanded archetype carried by Singapore) plus the `explain` block behind the KMeans clustering tab |
 
 ## Data versions
 

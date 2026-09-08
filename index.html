@@ -329,6 +329,7 @@
 
   let map = null, tiles = null, raf = null;
   let cid = null;                        // Uint16 per mask pixel: 0 = water, else country index (1 with land-only data)
+  let countryAnchor = null;              // per country index: [nx, ny] of a mask pixel inside it (see anchorCountries)
   let countries = [];                    // index -> { id, name }, index 0 = "no country"
   let pop = null;                        // { levels: [{w,h,data}], total }
   let legendRange = null;                // { lo, hi } in people per km², current frame
@@ -461,6 +462,7 @@
       }
     }
     cid = decodeMask(g, W, H);
+    countryAnchor = anchorCountries(cid, W, H);
     c.width = c.height = 0;                       // release the canvas backing store
     if (HAVE_COUNTRIES) { assignCountryColors(); measureCountries(); applyLayer(state.layer); initialHighlight(); }
     state.loading = false;
@@ -502,6 +504,27 @@
       out[p] = found;
     }
     return out;
+  }
+
+  // One representative mask pixel per country: the mean pixel if it lies inside the country, else the
+  // first pixel in row order. Used to force a grid cell for highlighted countries too small to catch a
+  // cell centre at coarse levels (Singapore), so a modelled city-state keeps its outline on the map.
+  function anchorCountries(out, W, H) {
+    const N = countries.length, sx = new Float64Array(N), sy = new Float64Array(N), cnt = new Float64Array(N);
+    const first = new Int32Array(N).fill(-1);
+    for (let p = 0, y = 0; y < H; y++) for (let x = 0; x < W; x++, p++) {
+      const v = out[p]; if (!v) continue;
+      sx[v] += x; sy[v] += y; cnt[v]++;
+      if (first[v] < 0) first[v] = p;
+    }
+    const anchors = new Array(N).fill(null);
+    for (let v = 1; v < N; v++) {
+      if (!cnt[v]) continue;
+      const mx = Math.round(sx[v] / cnt[v]), my = Math.round(sy[v] / cnt[v]);
+      const pxl = out[my * W + mx] === v ? my * W + mx : first[v];
+      anchors[v] = [((pxl % W) + 0.5) / W, (Math.floor(pxl / W) + 0.5) / H];
+    }
+    return anchors;
   }
 
   function maskIndex(nx, ny) {
@@ -939,31 +962,45 @@
     const dlon = 2 * Math.PI / n;
 
     const rows = [], dens = [];
+    const mkCell = (i, j) => {
+      const nx = (i + 0.5) / n, ny = (j + 0.5) / n, wx = ((nx % 1) + 1) % 1;
+      const cell = { i, j, cx: (i + 0.5) * cs - pb.min.x, cy: (j + 0.5) * cs - pb.min.y, vs: 1, vc: 0, d: 0, country: 0 };
+      if (needCountry) cell.country = countryOfCell(k, i, j);
+      if (popMode) {
+        const latTop = latOfNy(j / n), latBot = latOfNy((j + 1) / n);
+        const areaKm2 = R2 * dlon * (Math.sin(latTop) - Math.sin(latBot));
+        const ii = ((i % n) + n) % n;
+        const count = popInBox(level, ii / n * 360 - 180, (ii + 1) / n * 360 - 180, latTop * 180 / Math.PI, latBot * 180 / Math.PI);
+        cell.d = count / areaKm2;
+        if (cell.d > 0) dens.push(cell.d);
+      } else if (needVal) {
+        cell.vs = needSize ? value(wx, ny, 0) : 1;
+        cell.vc = needColorVal ? value(wx, ny, needSize ? 1 : 0) : 0;
+      }
+      return cell;
+    };
     for (let j = j0; j <= j1; j++) {
       const row = [], ny = (j + 0.5) / n;
-      let latTop = 0, latBot = 0, areaKm2 = 1;
-      if (popMode) {
-        latTop = latOfNy(j / n); latBot = latOfNy((j + 1) / n);
-        areaKm2 = R2 * dlon * (Math.sin(latTop) - Math.sin(latBot));
-      }
-      for (let i = i0; i <= i1; i++) {
-        const nx = (i + 0.5) / n;
-        if (!landAt(nx, ny)) { row.push(null); continue; }
-        const wx = ((nx % 1) + 1) % 1;
-        const cell = { i, j, cx: (i + 0.5) * cs - pb.min.x, cy: (j + 0.5) * cs - pb.min.y, vs: 1, vc: 0, d: 0, country: 0 };
-        if (needCountry) cell.country = countryOfCell(k, i, j);
-        if (popMode) {
-          const ii = ((i % n) + n) % n;
-          const count = popInBox(level, ii / n * 360 - 180, (ii + 1) / n * 360 - 180, latTop * 180 / Math.PI, latBot * 180 / Math.PI);
-          cell.d = count / areaKm2;
-          if (cell.d > 0) dens.push(cell.d);
-        } else if (needVal) {
-          cell.vs = needSize ? value(wx, ny, 0) : 1;
-          cell.vc = needColorVal ? value(wx, ny, needSize ? 1 : 0) : 0;
-        }
-        row.push(cell);
-      }
+      for (let i = i0; i <= i1; i++) row.push(landAt((i + 0.5) / n, ny) ? mkCell(i, j) : null);
       rows.push(row);
+    }
+    // highlighted countries without a single cell at this level (city-states at coarse levels) get
+    // the cell holding their anchor pixel, so the outline never disappears
+    if (needCountry && st.highlight.size && countryAnchor) {
+      const seen = new Set();
+      for (const row of rows) for (const c of row) if (c) seen.add(c.country);
+      for (const hc of st.highlight) {
+        const a = countryAnchor[hc];
+        if (seen.has(hc) || !a) continue;
+        const j = Math.floor(a[1] * n);
+        if (j < j0 || j > j1) continue;
+        let i = Math.floor(a[0] * n);
+        while (i < i0) i += n;
+        while (i - n >= i0) i -= n;
+        if (i > i1) continue;
+        const row = rows[j - j0], cell = row[i - i0] || mkCell(i, j);
+        cell.country = hc; row[i - i0] = cell;
+      }
     }
 
     // population: log-scale density, normalised per frame to the 99th percentile of populated land cells
@@ -1184,9 +1221,10 @@
     if (kmFor === key) return;
     kmFor = key; kmEx = def.explain;
     const ex = def.explain, F = ex.features, rows = ex.rows;
-    const ids = def.archetypes.map(a => typeof a === 'object' ? a.id : a);
+    // only archetypes with a cluster behind them; display-only ones (e.g. islanded) have no centroid
+    const ids = def.archetypes.map(a => typeof a === 'object' ? a.id : a).filter(id => !ex.centroids || ex.centroids[id]);
     const A = ids.map(id => archOf(def, id));
-    const modelledKeys = new Set(Object.values(def.modelled || {}));
+    const modelledKeys = new Set(ids.map(id => (def.modelled || {})[id]).filter(k => k != null));
     const total2050 = rows.reduce((s, r) => s + r.demand_twh_2050, 0);
 
     // ----- left: feature legend, then one block per cluster
